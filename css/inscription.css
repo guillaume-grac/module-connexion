@@ -81,3 +81,8 @@ footer{
     font-size: 26px;
     text-decoration: none;
 }
+
+.alert-css{
+    margin-top: -25%;
+    width: 30%;
+}

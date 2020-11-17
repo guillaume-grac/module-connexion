@@ -11,7 +11,7 @@
         <header>
             <nav>
                 <ul class="nav justify-content-center nav-head">
-                    <li class="nav-item"><a class="nav-link" href="index.php">| Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.php">| Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" href="connexion.php">| Connexion avec le Valhalla</a></li>
                     <li class="nav-item"><a class="nav-link" href="profil.php">| Mon Profil</a></li>
                 </ul>
@@ -48,7 +48,11 @@
                 </form>
 
                 <?php
-                if (isset($_POST['register'])) {
+
+                     //On se connecte
+                     $db = mysqli_connect ('localhost', 'root', '', 'moduleconnexion'); 
+
+                    if (isset($_POST['register'])) {
 
                     //On récupère les valeurs entrées par l'utilisateur :
                     $login=$_POST['login'];
@@ -56,16 +60,29 @@
                     $nom=$_POST['nom'];
                     $password=$_POST['password'];
                     $confirm_password=$_POST['confirm-password'];
-
-                    //On se connecte
-                    $db = mysqli_connect ('localhost', 'root', '', 'moduleconnexion'); 
+                    $error_log = 'Veuillez réessayer ! Login ou mot de passe incorrect.';
                     
-                    //On prépare la commande sql d'insertion
-                    $sql = "INSERT INTO utilisateurs (id, login, prenom, nom, password) VALUES (NULL,'$login','$prenom','$nom','$password')";
-                    mysqli_query($db, $sql);
-                    }
-                ?>
 
+                    //On prépare la commande d'insertion
+                    if($password === $confirm_password){
+                    $requete = "INSERT INTO utilisateurs (login, prenom, nom, password) VALUES ('$login','$prenom','$nom','$password')";
+                    mysqli_query($db,$requete);
+                    echo ('<section class=" alert-css text-center alert alert-warning alert-dismissible fade show">
+                            <strong>Skoll!</strong> Votre compte a bien été créer.
+                            </section>');
+                    }
+
+                    else{
+                    echo($error_log);
+                    }
+                    
+                    $nbr_ligne = mysqli_num_rows(mysqli_query($db,"SELECT * FROM utilisateurs"));
+
+                    if($nbr_ligne == 0){
+                    mysqli_query($db,"ALTER TABLE utilisateurs AUTO_INCREMENT = 1");
+                        }
+                    }   
+                ?>
             </section>
         </main>
         <footer>

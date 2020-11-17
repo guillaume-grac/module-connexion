@@ -11,7 +11,7 @@
     <header>
         <nav>
             <ul class="nav justify-content-center nav-head">
-                <li class="nav-item"><a class="nav-link" href="index.php">| Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.php">| Accueil</a></li>
                 <li class="nav-item"><a class="nav-link" href="inscription.php">| Rejoindre l'Aventure</a></li>
                 <li class="nav-item"><a class="nav-link" href="profil.php">| Mon Profil</a></li>
             </ul>
