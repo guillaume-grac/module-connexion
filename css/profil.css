@@ -19,26 +19,26 @@ header{
     background-color: rgb(0, 0, 0, .7);
     font-family: 'Aclonica', sans-serif;
 }
-
+                    
 .nav-head{
     padding-top: 1%;
     padding-bottom: 1%;
     font-size: 24px;
 }
-
+                    
 li a{
-    transition: all 0.3s ease 0.3s;
+    transition: all 0.5s ease 0.5s;
     color: rgb(151, 98, 28);
     text-decoration: none;
 }
-
+                    
 li a:hover{
     color: white;
 }
 
                     /* Main */
 
-form{
+.formulaire{
     margin-top: 5%;
     padding: 1%;
     margin-left: 35%;
@@ -70,7 +70,12 @@ footer{
 }
 
 #gate{
-    color: white;
+    color: rgb(151, 98, 28); 
     font-size: 26px;
     text-decoration: none;
+}
+
+#gate:hover{
+    transition: all 0.3s ease 0.3s;
+    color: white;
 }

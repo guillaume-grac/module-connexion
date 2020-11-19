@@ -51,7 +51,12 @@ footer{
 }
 
 #gate{
-    color: white;
+    color: rgb(151, 98, 28); 
     font-size: 26px;
     text-decoration: none;
+}
+
+#gate:hover{
+    transition: all 0.3s ease 0.3s;
+    color: white;
 }

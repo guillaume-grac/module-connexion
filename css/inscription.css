@@ -17,6 +17,7 @@ body{
 
 header{
     background-color: rgb(0, 0, 0, .7);
+    color: rgb(151, 98, 28);
     font-family: 'Aclonica', sans-serif;
 }
 
@@ -26,13 +27,13 @@ header{
     font-size: 24px;
 }
 
-li a{
+li a {
     transition: all 0.3s ease 0.3s;
     color: rgb(151, 98, 28);
     text-decoration: none;
 }
 
-li a:hover{
+li a:hover{  
     color: white;
 }
 
@@ -77,7 +78,7 @@ footer{
 }
 
 #gate{
-    color: white;
+    color: rgb(151, 98, 28); 
     font-size: 26px;
     text-decoration: none;
 }
@@ -85,4 +86,9 @@ footer{
 .alert-css{
     margin-top: -25%;
     width: 30%;
+}
+
+#gate:hover{
+    transition: all 0.3s ease 0.3s;
+    color: white;
 }

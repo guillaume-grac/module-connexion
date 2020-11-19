@@ -1,3 +1,28 @@
+<?php
+
+    session_start();
+
+    $bdd = mysqli_connect('localhost', 'root', '', 'moduleconnexion');
+
+    if (isset($_POST['connexion'])){
+        $identifiant = ($_POST['login']);
+        $password = ($_POST['password']);
+        $error_log = '<section class="alert alert-danger text-center" role="alert"><b>Veuillez réessayer !</b> Login ou mot de passe incorrect.</section>';
+
+        $verification = mysqli_query($bdd, "SELECT login FROM utilisateurs WHERE login = '".$_POST['login']."'");
+        $verification1 = mysqli_query($bdd, "SELECT password FROM utilisateurs WHERE password = '".$_POST['password']."'");
+
+        if(mysqli_num_rows($verification) && mysqli_num_rows($verification1)){
+            $_SESSION['login'] = $identifiant;
+            $_SESSION['password'] = $password;
+            header('Location: ../index.php');
+        }
+        else{       
+         echo $error_log;
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,7 +38,7 @@
             <ul class="nav justify-content-center nav-head">
                 <li class="nav-item"><a class="nav-link" href="../index.php">| Accueil</a></li>
                 <li class="nav-item"><a class="nav-link" href="inscription.php">| Rejoindre l'Aventure</a></li>
-                <li class="nav-item"><a class="nav-link" href="profil.php">| Mon Profil</a></li>
+                <li class="nav-item"><a class="nav-link" href="php/profil.php"><?php if (isset($_SESSION['login'])){ echo '| Mon Profil';}?></a></li>
             </ul>
         </nav>
     </header>
@@ -25,14 +50,14 @@
                 </section>
                 <section class="form-group">
                     <label for="login">Login</label>
-                    <input type="text" class="form-control" id="login" placeholder="Votre Login" required> 
+                    <input type="text" class="form-control" name="login" placeholder="Votre Login" required> 
                 </section>
                 <section class="form-group">
                     <label for="password">Mot de Passe</label>
-                    <input type="password" class="form-control" id="password" placeholder="Votre Mot de Passe" required>
+                    <input type="password" class="form-control" name="password" placeholder="Votre Mot de Passe" required>
                 </section>
                 <section class="form-end">
-                    <button type="submit" class="btn btn-dark">En route !</button><br>
+                    <button type="submit" name="connexion" class="btn btn-dark">En route !</button><br>
                     <img id="bouclier" src="../images/bouclier.png" title="Levez les boucliers !" alt="Bouclier">
                 </section>
             </form>

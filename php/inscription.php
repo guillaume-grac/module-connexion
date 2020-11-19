@@ -1,3 +1,13 @@
+<?php
+//On se connecte
+$db = mysqli_connect ('localhost', 'root', '', 'moduleconnexion'); 
+
+ $nbr_ligne = mysqli_num_rows(mysqli_query($db,"SELECT * FROM utilisateurs"));
+
+ if($nbr_ligne == 0){
+     mysqli_query($db,"ALTER TABLE utilisateurs AUTO_INCREMENT = 1");
+ }
+ ?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -13,7 +23,7 @@
                 <ul class="nav justify-content-center nav-head">
                     <li class="nav-item"><a class="nav-link" href="../index.php">| Accueil</a></li>
                     <li class="nav-item"><a class="nav-link" href="connexion.php">| Connexion avec le Valhalla</a></li>
-                    <li class="nav-item"><a class="nav-link" href="profil.php">| Mon Profil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="php/profil.php"><?php if (isset($_SESSION['login'])){ echo '| Mon Profil';}?></a></li>
                 </ul>
             </nav>
         </header>
@@ -49,37 +59,34 @@
 
                 <?php
 
-                     //On se connecte
-                     $db = mysqli_connect ('localhost', 'root', '', 'moduleconnexion'); 
-
                     if (isset($_POST['register'])) {
 
-                    //On récupère les valeurs entrées par l'utilisateur :
-                    $login=$_POST['login'];
-                    $prenom=$_POST['prenom'];
-                    $nom=$_POST['nom'];
-                    $password=$_POST['password'];
-                    $confirm_password=$_POST['confirm-password'];
-                    $error_log = 'Veuillez réessayer ! Login ou mot de passe incorrect.';
+                        //On récupère les valeurs entrées par l'utilisateur :
+                        $login=$_POST['login'];
+                        $prenom=$_POST['prenom'];
+                        $nom=$_POST['nom'];
+                        $password=$_POST['password'];
+                        $confirm_password=$_POST['confirm-password'];
+                        $error_log = '<section class=" alert-css text-center alert alert-warning alert-dismissible fade show">
+                        <strong>Mauvais mot de passe !</strong> Les mots de passe ne sont pas identiques.</section>';
                     
+                        //On prépare la commande d'insertion
+                        if($password === $confirm_password){
 
-                    //On prépare la commande d'insertion
-                    if($password === $confirm_password){
-                    $requete = "INSERT INTO utilisateurs (login, prenom, nom, password) VALUES ('$login','$prenom','$nom','$password')";
-                    mysqli_query($db,$requete);
-                    echo ('<section class=" alert-css text-center alert alert-warning alert-dismissible fade show">
-                            <strong>Skoll!</strong> Votre compte a bien été créer.
-                            </section>');
-                    }
+                            $requete = "INSERT INTO utilisateurs (login, prenom, nom, password) VALUES ('$login','$prenom','$nom','$password')";
+                            $verification = mysqli_query($db, "SELECT login FROM utilisateurs WHERE login = '".$_POST['login']."'");
 
-                    else{
-                    echo($error_log);
-                    }
-                    
-                    $nbr_ligne = mysqli_num_rows(mysqli_query($db,"SELECT * FROM utilisateurs"));
+                            if(mysqli_num_rows($verification)) {
+                                echo("Login \"". $_POST['login'] . "\" est déjà utilisé, veuillez en choisir un autre :-)");
+                            }
 
-                    if($nbr_ligne == 0){
-                    mysqli_query($db,"ALTER TABLE utilisateurs AUTO_INCREMENT = 1");
+                            mysqli_query($db,$requete);
+
+                            header('Location: connexion.php');
+                            exit();
+                        }
+                        else{
+                            echo($error_log);
                         }
                     }   
                 ?>
