@@ -1,12 +1,13 @@
 <?php
     session_start();
 
-     if (isset($_POST['logout'])){
+    if (isset($_POST['logout'])){
 
         session_destroy();
         header('location: connexion.php');
         exit();
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -40,27 +41,27 @@
                             <p>Modifier vos informations.</p>
                         </section>
                         <section class="form-group">
-                            <label for="login">Modifier votre Login</label>
-                            <input type="text" class="form-control" id="login" placeholder="Votre nouveau Login" required> 
+                            <label for="Nlogin">Modifier votre Login</label>
+                            <input type="text" class="form-control" id="Nlogin" placeholder="Votre nouveau Login" value="'.$_SESSION['login'].'" required> 
                         </section>
                         <section class="form-group">
-                            <label for="nom">Modifier votre Nom</label>
-                            <input type="text" class="form-control" id="nom" placeholder="Votre nouveau Nom" required>
+                            <label for="Nprenom">Modifier votre Nom</label>
+                            <input type="text" class="form-control" id="Nprenom" placeholder="Votre nouveau Nom" value="'.$_SESSION['prenom'].'" required>
                         </section>
                         <section class="form-group">
-                            <label for="login">Modifier votre Prénom</label>
-                            <input type="text" class="form-control" id="prenom" placeholder="Votre nouveau Prénom" required>
+                            <label for="Nnom">Modifier votre Prénom</label>
+                            <input type="text" class="form-control" id="Nnom" placeholder="Votre nouveau Prénom" value="'.$_SESSION['nom'].'" required>
                         </section>
                         <section class="form-group">
-                            <label for="password">Modifier votre Mot de Passe</label>
-                            <input type="password" class="form-control" id="password" placeholder="Votre nouveau Mot de Passe" required>
+                            <label for="Npassword">Modifier votre Mot de Passe</label>
+                            <input type="password" class="form-control" id="Npassword" placeholder="Votre nouveau Mot de Passe" value="'.$_SESSION['password'].'" required>
                         </section>
                         <section class="form-group">
-                            <label for="password">Confirmez votre nouveau Mot de Passe</label>
-                            <input type="password" class="form-control" id="password" placeholder="Votre nouveau Mot de Passe" required>
+                            <label for="NCpassword">Confirmez votre nouveau Mot de Passe</label>
+                            <input type="password" class="form-control" id="NCpassword" placeholder="Votre nouveau Mot de Passe" value="'.$_SESSION['password'].'" required>
                         </section>
                         <section class="form-end">
-                            <button type="submit" class="btn btn-dark">Enregistrer</button><br>
+                            <button type="submit" name="update" class="btn btn-dark">Enregistrer</button><br>
                         </section>
                     </form>
                 </section>';

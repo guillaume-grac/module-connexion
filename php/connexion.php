@@ -12,6 +12,13 @@
         $verification = mysqli_query($bdd, "SELECT login FROM utilisateurs WHERE login = '".$_POST['login']."'");
         $verification1 = mysqli_query($bdd, "SELECT password FROM utilisateurs WHERE password = '".$_POST['password']."'");
 
+        $var = mysqli_fetch_array($verification);
+          
+            $_SESSION['login'] = $var[1];
+            $_SESSION['prenom'] = $var[2];
+            $_SESSION['nom'] = $var[3];
+            $_SESSION['password'] = $var[4];
+                
         if(mysqli_num_rows($verification) && mysqli_num_rows($verification1)){
             $_SESSION['login'] = $identifiant;
             $_SESSION['password'] = $password;

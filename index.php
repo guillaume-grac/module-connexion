@@ -33,17 +33,12 @@
         <section id="titre" class="container-fluid">
             <h1>Road To Valhalla</h1>
             <section id="acc-text">
-                <p>Rejoignez des milliers de joueurs dans un MMORPG gigantesque ...</p>
+                <p>Rejoignez des milliers de joueurs dans un MMORPG gigantesque en monde ouvert ...</p>
                 <p>Combattez, pillez, formez des clans, et mettez vous dans la peau d'un vrai viking !</p>
             </section>  
         </section>
-        <section class="container-fluid boutons">
-            <section class="container-fluid bouton-1">
-                <a class="btn-grad" href="php/inscription.php">Rejoindre l'Aventure<br>(Inscription)</a>
-            </section>
-            <section class="container-fluid bouton-2">
-                <a class="btn-grad-2" href="php/connexion.php">Connexion avec le Valhalla<br>(Connexion au compte)</a>
-            </section>
+        <section>
+            <img id="map" src="images/map.jpg" alt="map">
         </section>
     </main>
     <footer>
