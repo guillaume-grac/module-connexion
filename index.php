@@ -13,7 +13,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Vikings, road to Valhalla MMORPG | Accueil</title>
+    <title>Assassin's creed Valhalla | Accueil</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
@@ -31,19 +31,20 @@
     </header>
     <main>
         <section id="titre" class="container-fluid">
-            <h1>Road To Valhalla</h1>
+            <h1>Assassin's Creed Valhalla</h1>
             <section id="acc-text">
-                <p>Rejoignez des milliers de joueurs dans un MMORPG gigantesque en monde ouvert ...</p>
-                <p>Combattez, pillez, formez des clans, et mettez vous dans la peau d'un vrai viking !</p>
+                <p>Assassin's Creed Valhalla est un RPG en monde ouvert se déroulant pendant l'âge des vikings.<br>
+                 Vous incarnez Eivor, un viking du sexe de votre choix qui a quitté la Norvège pour trouver la fortune et la gloire en Angleterre.<br> 
+                 Raids, construction et croissance de votre colonie, mais aussi personnalisation du héros ou de l'héroïne sont au programme de cet épisode.</p>
             </section>  
         </section>
         <section>
-            <img id="map" src="images/map.jpg" alt="map">
+            <img id="map" src="images/map.gif" alt="map">
         </section>
     </main>
     <footer>
-        <p>Vikings, Road to Valhalla 1.0.1</p>
-        <a href="php/admin.php"><i id="gate" class="fas fa-dungeon" title="Le royaume des dieux"></i></a>
+        <p>Assassin's Creed Valhalla</p>
+        <a href="php/admin.php"><?php if (isset($_SESSION['login'])){ if($_SESSION['login']==='admin') { echo '<i id="gate" class="fas fa-dungeon" title="Le royaume des dieux"></i>';}}?></a>
     </footer>
 </body>
 </html>
