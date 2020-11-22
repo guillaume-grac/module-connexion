@@ -1,25 +1,28 @@
 <?php
 
-    session_start();
+    $db = mysqli_connect('localhost', 'root', '', 'moduleconnexion');
 
-    $bdd = mysqli_connect('localhost', 'root', '', 'moduleconnexion');
+    session_start();
 
     if (isset($_POST['connexion'])){
         $identifiant = ($_POST['login']);
         $password = ($_POST['password']);
+        $id=$_SESSION['id'];
         $error_log = '<section class="alert alert-danger text-center" role="alert"><b>Veuillez réessayer !</b> Login ou mot de passe incorrect.</section>';
 
-        $verification = mysqli_query($bdd, "SELECT login FROM utilisateurs WHERE login = '".$_POST['login']."'");
-        $verification1 = mysqli_query($bdd, "SELECT password FROM utilisateurs WHERE password = '".$_POST['password']."'");
+        $verification = mysqli_query($db, "SELECT * FROM utilisateurs WHERE login = '".$_POST['login']."'AND password = '".$_POST['password']."'");
 
-        $var = mysqli_fetch_array($verification);
+        $var = mysqli_fetch_assoc($verification);
           
-            $_SESSION['login'] = $var[1];
-            $_SESSION['prenom'] = $var[2];
-            $_SESSION['nom'] = $var[3];
-            $_SESSION['password'] = $var[4];
                 
-        if(mysqli_num_rows($verification) && mysqli_num_rows($verification1)){
+        if(mysqli_num_rows($verification)){
+
+            $_SESSION['login'] = $var['login'];
+            $_SESSION['prenom'] = $var['prenom'];
+            $_SESSION['nom'] = $var['nom'];
+            $_SESSION['password'] = $var['password'];
+            $_SESSION['id'] = $var['id'];
+
             $_SESSION['login'] = $identifiant;
             $_SESSION['password'] = $password;
             header('Location: ../index.php');

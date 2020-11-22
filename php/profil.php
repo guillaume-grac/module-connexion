@@ -1,4 +1,5 @@
 <?php
+
     session_start();
 
     if (isset($_POST['logout'])){
@@ -7,6 +8,35 @@
         header('location: connexion.php');
         exit();
     }
+
+    $db = mysqli_connect('localhost', 'root', '', 'moduleconnexion');
+    if (isset($_SESSION['login'])){ 
+        if(isset($_POST['update'])){
+            if(isset($_POST['Nlogin']) && isset($_POST['Nprenom']) && isset($_POST['Nnom']) && $_POST['Npassword'] === $_POST['NCpassword']){
+
+                $login=$_POST['Nlogin'];
+                $prenom=$_POST['Nprenom'];
+                $nom=$_POST['Nnom'];
+                $password=$_POST['Npassword'];
+                $confirmpassword=$_POST['NCpassword'];
+                $id=$_SESSION['id'];                  
+
+                $update = mysqli_query($db, "UPDATE utilisateurs SET login = '$login', prenom = '$prenom', nom = '$nom', password = '$password' WHERE id = $id");
+
+                $_SESSION['login']=$login;
+                $_SESSION['prenom']=$prenom;
+                $_SESSION['nom']=$nom;
+                $_SESSION['password']=$password;
+
+                if($update){
+                    echo 'modification ok';
+                }
+                else {
+                    echo 'echec';
+                }
+            }
+        }
+    } 
 
 ?>
 
@@ -34,15 +64,6 @@
     <main>
         <?php 
 
-            //$new = mysqli_query(UPDATE utilisateurs SET login= '$login',prenom= '$prenom',nom= '$nom',password= '$newpass' WHERE id = '$id'");
-
-           /* if (isset($_POST['update'])){
-                $id=$_SESSION['id']
-                $login=$_POST['Nlogin'];
-                $prenom=$_POST['Nprenom'];
-                $nom=$_POST['Nnom'];
-                $password=$_POST['Npassword'];
-            */
             if (isset($_SESSION['login'])){ 
                 echo '
                 <section class="container-fluid">
@@ -52,32 +73,35 @@
                         </section>
                         <section class="form-group">
                             <label for="Nlogin">Modifier votre Login</label>
-                            <input type="text" class="form-control" id="Nlogin" placeholder="Votre nouveau Login" value="'.$_SESSION['login'].'" required> 
+                            <input type="text" class="form-control" name="Nlogin" placeholder="Votre nouveau Login" value="'.$_SESSION['login'].'" required> 
                         </section>
                         <section class="form-group">
                             <label for="Nprenom">Modifier votre Prenom</label>
-                            <input type="text" class="form-control" id="Nprenom" placeholder="Votre nouveau Nom" value="'.$_SESSION['prenom'].'" required>
+                            <input type="text" class="form-control" name="Nprenom" placeholder="Votre nouveau prénom" value="'.$_SESSION['prenom'].'" required>
                         </section>
                         <section class="form-group">
                             <label for="Nnom">Modifier votre Nom</label>
-                            <input type="text" class="form-control" id="Nnom" placeholder="Votre nouveau Prénom" value="'.$_SESSION['nom'].'" required>
+                            <input type="text" class="form-control" name="Nnom" placeholder="Votre nouveau nom" value="'.$_SESSION['nom'].'" required>
                         </section>
                         <section class="form-group">
                             <label for="Npassword">Modifier votre Mot de Passe</label>
-                            <input type="password" class="form-control" id="Npassword" placeholder="Votre nouveau Mot de Passe" value="'.$_SESSION['password'].'" required>
+                            <input type="password" class="form-control" name="Npassword" placeholder="Votre nouveau Mot de Passe" value="'.$_SESSION['password'].'" required>
                         </section>
                         <section class="form-group">
                             <label for="NCpassword">Confirmez votre nouveau Mot de Passe</label>
-                            <input type="password" class="form-control" id="Npassword" placeholder="Votre nouveau Mot de Passe" value="'.$_SESSION['password'].'" required>
+                            <input type="password" class="form-control" name="NCpassword" placeholder="Votre nouveau Mot de Passe" value="'.$_SESSION['password'].'" required>
                         </section>
                         <section class="form-end">
                             <button type="submit" name="update" class="btn btn-dark">Enregistrer</button><br>
                         </section>
                     </form>
                 </section>';
-            }
-            else 
+            }       
+               
+            else{
                 echo '<section class="alert alert-danger text-center" role="alert">Vous devez être connecté pour voir votre Profil : <a href="connexion.php" class="alert-link">Se connecter</a>.</section>';
+            }    
+                                  
         ?>       
     </main>
     <footer>
