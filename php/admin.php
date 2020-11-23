@@ -31,7 +31,7 @@
         </nav>
     </header>
     <main>
-        <section class="affichage">
+        <section class="affichage container-fluid">
             <table>
                 <thead>
                     <?php
