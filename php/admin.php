@@ -38,7 +38,7 @@
                         
                         $db = mysqli_connect ('localhost', 'root', '', 'moduleconnexion'); 
                         $affichage = mysqli_query($db, "SELECT * FROM utilisateurs");
-                        $affichage2 = mysqli_query ($db, 'SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME=\'utilisateurs\'');
+                        /* $affichage2 = mysqli_query ($db, 'SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME=\'utilisateurs\'');
 
                         while (( $nom = mysqli_fetch_assoc($affichage2))  != NULL){
 
@@ -47,6 +47,9 @@
                                 echo  '<th>'.$value.'</th>';
                             }
                         }    
+                        Code en suspens, marchait avant envoie, ne marche plus après envoie */
+
+                        echo ( "<th>Id</th><th>Login</th><th>Prenom</th><th>Nom</th><th>Password</th>");
 
                         while (( $all_result = mysqli_fetch_assoc($affichage))  != NULL){
                             
@@ -58,7 +61,7 @@
                             }
                         
                             echo '</tr>';
-                        }           
+                        }        
                     ?>
                 </thead>
             </table>

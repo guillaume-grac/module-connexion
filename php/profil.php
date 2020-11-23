@@ -53,6 +53,7 @@
                         $_SESSION['prenom']=$prenom;
                         $_SESSION['nom']=$nom;
                         $_SESSION['password']=$password;
+                        $_SESSION['id']=$id;
                         $modif = '<p class="alert alert-success text-center" role="alert"><b>Modification réussie</b></p>';
 
                         if($update){
