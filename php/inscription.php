@@ -1,12 +1,11 @@
 <?php
-//On se connecte
-$db = mysqli_connect ('localhost', 'root', '', 'moduleconnexion'); 
+    $db = mysqli_connect ('localhost', 'root', '', 'moduleconnexion'); 
 
- $nbr_ligne = mysqli_num_rows(mysqli_query($db,"SELECT * FROM utilisateurs"));
+    $nbr_ligne = mysqli_num_rows(mysqli_query($db,"SELECT * FROM utilisateurs"));
 
- if($nbr_ligne == 0){
-     mysqli_query($db,"ALTER TABLE utilisateurs AUTO_INCREMENT = 1");
- }
+    if($nbr_ligne == 0){
+        mysqli_query($db,"ALTER TABLE utilisateurs AUTO_INCREMENT = 1");
+    }
  ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -61,7 +60,6 @@ $db = mysqli_connect ('localhost', 'root', '', 'moduleconnexion');
 
                     if (isset($_POST['register'])) {
 
-                        //On récupère les valeurs entrées par l'utilisateur :
                         $login=$_POST['login'];
                         $prenom=$_POST['prenom'];
                         $nom=$_POST['nom'];
@@ -70,7 +68,6 @@ $db = mysqli_connect ('localhost', 'root', '', 'moduleconnexion');
                         $error_log = '<section class=" alert-css text-center alert alert-warning alert-dismissible fade show">
                         <strong>Mauvais mot de passe !</strong> Les mots de passe ne sont pas identiques.</section>';
                     
-                        //On prépare la commande d'insertion
                         if($password === $confirm_password){
 
                             $requete = "INSERT INTO utilisateurs (login, prenom, nom, password) VALUES ('$login','$prenom','$nom','$password')";
@@ -93,7 +90,7 @@ $db = mysqli_connect ('localhost', 'root', '', 'moduleconnexion');
             </section>
         </main>
         <footer>
-            <p>Assassin's Creed Valhalla</p>
+            <p><b>Assassin's Creed Valhalla</b></p>
         </footer> 
     </body>
 </html>

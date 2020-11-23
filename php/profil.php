@@ -9,35 +9,6 @@
         exit();
     }
 
-    $db = mysqli_connect('localhost', 'root', '', 'moduleconnexion');
-    if (isset($_SESSION['login'])){ 
-        if(isset($_POST['update'])){
-            if(isset($_POST['Nlogin']) && isset($_POST['Nprenom']) && isset($_POST['Nnom']) && $_POST['Npassword'] === $_POST['NCpassword']){
-
-                $login=$_POST['Nlogin'];
-                $prenom=$_POST['Nprenom'];
-                $nom=$_POST['Nnom'];
-                $password=$_POST['Npassword'];
-                $confirmpassword=$_POST['NCpassword'];
-                $id=$_SESSION['id'];                  
-
-                $update = mysqli_query($db, "UPDATE utilisateurs SET login = '$login', prenom = '$prenom', nom = '$nom', password = '$password' WHERE id = $id");
-
-                $_SESSION['login']=$login;
-                $_SESSION['prenom']=$prenom;
-                $_SESSION['nom']=$nom;
-                $_SESSION['password']=$password;
-
-                if($update){
-                    echo 'modification ok';
-                }
-                else {
-                    echo 'echec';
-                }
-            }
-        }
-    } 
-
 ?>
 
 <!DOCTYPE html>
@@ -64,12 +35,44 @@
     <main>
         <?php 
 
+            $db = mysqli_connect('localhost', 'root', '', 'moduleconnexion');
+            if (isset($_SESSION['login'])){ 
+                if(isset($_POST['update'])){
+                    if(isset($_POST['Nlogin']) && isset($_POST['Nprenom']) && isset($_POST['Nnom']) && $_POST['Npassword'] === $_POST['NCpassword']){
+
+                        $login=$_POST['Nlogin'];
+                        $prenom=$_POST['Nprenom'];
+                        $nom=$_POST['Nnom'];
+                        $password=$_POST['Npassword'];
+                        $confirmpassword=$_POST['NCpassword'];
+                        $id=$_SESSION['id'];                  
+
+                        $update = mysqli_query($db, "UPDATE utilisateurs SET login = '$login', prenom = '$prenom', nom = '$nom', password = '$password' WHERE id = $id");
+
+                        $_SESSION['login']=$login;
+                        $_SESSION['prenom']=$prenom;
+                        $_SESSION['nom']=$nom;
+                        $_SESSION['password']=$password;
+                        $modif = '<p class="alert alert-success text-center" role="alert"><b>Modification réussie</b></p>';
+
+                        if($update){
+                            echo $modif;
+                        }
+                    }
+
+                    if($_POST['Npassword'] != $_POST['NCpassword']){
+                        echo '<p class="alert alert-danger text-center" role="alert"><b>Echec</b> Mauvais mot de passe</p>';
+                    }
+                }
+            } 
+
             if (isset($_SESSION['login'])){ 
                 echo '
                 <section class="container-fluid">
                     <form class="formulaire" method="post" action="profil.php"> 
                         <section id="pro-text">
                             <p>Modifier vos informations.</p>
+                            <p>Si aucun message de confirmation apparait cela veux dire que la modifiaction n\'a pas eu lieu.</p>
                         </section>
                         <section class="form-group">
                             <label for="Nlogin">Modifier votre Login</label>
@@ -105,7 +108,7 @@
         ?>       
     </main>
     <footer>
-        <p>Assassin's Creed Valhalla</p>
+        <p><b>Assassin's Creed Valhalla</b></p>
         <a href="admin.php"><?php if (isset($_SESSION['login'])){ if($_SESSION['login']==='admin') { echo '<i id="gate" class="fas fa-dungeon" title="Le royaume des dieux"></i>';}}?></a>
     </footer> 
 </body>

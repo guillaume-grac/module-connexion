@@ -54,13 +54,14 @@ main{
 }
 
 #map{
-    margin-top: 5%;
+    margin-top: 2%;
     display: block;
     margin-left: auto;
     margin-right: auto;
     -webkit-transition: .8s ease-in-out !important; 
     transition: .8s ease-in-out !important; 
-    width: 30%;
+    width: 600px;
+    height: 400px;
 }
 
 #map:hover{

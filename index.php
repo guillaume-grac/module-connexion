@@ -38,12 +38,12 @@
                  Raids, construction et croissance de votre colonie, mais aussi personnalisation du héros ou de l'héroïne sont au programme de cet épisode.</p>
             </section>  
         </section>
-        <section>
-            <img id="map" src="images/map.gif" alt="map">
+        <section class="container-fluid">
+            <iframe id="map" src="https://www.youtube.com/embed/B7JZcPQg-gA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </section>
     </main>
     <footer>
-        <p>Assassin's Creed Valhalla</p>
+        <p><b>Assassin's Creed Valhalla</b></p>
         <a href="php/admin.php"><?php if (isset($_SESSION['login'])){ if($_SESSION['login']==='admin') { echo '<i id="gate" class="fas fa-dungeon" title="Le royaume des dieux"></i>';}}?></a>
     </footer>
 </body>

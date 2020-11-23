@@ -65,7 +65,7 @@
         </section>
     </main>
     <footer>
-        <p>Assassin's Creed Valhalla</p>
+        <p><b>Assassin's Creed Valhalla</b></p>
         <a href="admin.php"><i id="gate" class="fas fa-dungeon" title="Le royaume des dieux"></i></a>
     </footer>
 </body>

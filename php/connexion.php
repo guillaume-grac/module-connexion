@@ -4,33 +4,7 @@
 
     session_start();
 
-    if (isset($_POST['connexion'])){
-        $identifiant = ($_POST['login']);
-        $password = ($_POST['password']);
-        $id=$_SESSION['id'];
-        $error_log = '<section class="alert alert-danger text-center" role="alert"><b>Veuillez réessayer !</b> Login ou mot de passe incorrect.</section>';
-
-        $verification = mysqli_query($db, "SELECT * FROM utilisateurs WHERE login = '".$_POST['login']."'AND password = '".$_POST['password']."'");
-
-        $var = mysqli_fetch_assoc($verification);
-          
-                
-        if(mysqli_num_rows($verification)){
-
-            $_SESSION['login'] = $var['login'];
-            $_SESSION['prenom'] = $var['prenom'];
-            $_SESSION['nom'] = $var['nom'];
-            $_SESSION['password'] = $var['password'];
-            $_SESSION['id'] = $var['id'];
-
-            $_SESSION['login'] = $identifiant;
-            $_SESSION['password'] = $password;
-            header('Location: ../index.php');
-        }
-        else{       
-         echo $error_log;
-        }
-    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +27,35 @@
         </nav>
     </header>
     <main>
+        <?php 
+            if (isset($_POST['connexion'])){
+                $identifiant = ($_POST['login']);
+                $password = ($_POST['password']);
+                
+                $error_log = '<section class="alert alert-danger text-center" role="alert"><b>Veuillez réessayer !</b> Login ou mot de passe incorrect.</section>';
+        
+                $verification = mysqli_query($db, "SELECT * FROM utilisateurs WHERE login = '".$_POST['login']."'AND password = '".$_POST['password']."'");
+        
+                $var = mysqli_fetch_assoc($verification);
+                  
+                        
+                if(mysqli_num_rows($verification)){
+        
+                    $_SESSION['login'] = $var['login'];
+                    $_SESSION['prenom'] = $var['prenom'];
+                    $_SESSION['nom'] = $var['nom'];
+                    $_SESSION['password'] = $var['password'];
+                    $_SESSION['id'] = $var['id'];
+        
+                    $_SESSION['login'] = $identifiant;
+                    $_SESSION['password'] = $password;
+                    header('Location: ../index.php');
+                }
+                else{       
+                 echo $error_log;
+                }
+            }
+        ?>
         <section class="container-fluid">
             <form method="post" action="connexion.php">
                 <section id="co-text">
@@ -74,7 +77,7 @@
         </section>
     </main>
     <footer>
-        <p>Assassin's Creed Valhalla</p>
+        <p><b>Assassin's Creed Valhalla</b></p>
     </footer> 
 </body>
 </html>
